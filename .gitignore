@@ -1,4 +1,5 @@
 *.log
+/_temp/
 /vendor/
 node_modules/
 npm-debug.log
