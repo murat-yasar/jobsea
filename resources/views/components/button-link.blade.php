@@ -1,9 +1,9 @@
 @props([
     'url' => '/jobs/create',
     'icon' => null,
-    'bgClass' => 'bg-green-500',
-    'hoverClass' => 'hover:bg-green-400',
-    'textClass' => 'text-black',
+    'bgClass' => 'bg-green-600',
+    'hoverClass' => 'hover:bg-green-400 hover:text-gray-500',
+    'textClass' => 'text-white',
     'block' => false,
 ])
 

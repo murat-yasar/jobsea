@@ -11,6 +11,7 @@
 <body class="bg-gray-100">
    <x-header />
    @if (request()->is('/'))
+   <x-top-banner/>
    <x-hero-section/>
    @endif
    <main class="container mx-auto p-4 mt-4">
