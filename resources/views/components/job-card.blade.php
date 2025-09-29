@@ -20,7 +20,8 @@
             @endif
         </li>
         <li class="mb-2">
-            <strong>Tags:</strong> <span>{{ ucwords(str_replace(',', ', ', $job->tags)) }}</span>
+            <strong>Tags:</strong>
+            <span>{{ ucwords(str_replace(',', ', ', $job->tags)) }}</span>
         </li>
     </ul>
     <a href="{{ route('jobs.show', $job->id) }}"
