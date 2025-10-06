@@ -35,26 +35,27 @@
                   <li class="mb-2">
                      <strong>Site Location:</strong> {{ $job->city }}, {{ $job->state }}
                   </li>
+                  @if ($job->tags)
                   <li class="mb-2">
                      <strong>Tags:</strong>
                      <span>{{ ucwords(str_replace(',', ', ', $job->tags)) }}</span>
                   </li>
+                  @endif
                </ul>
             </div>
          </div>
 
          <div class="container mx-auto p-4">
             <h2 class="text-xl font-semibold mb-4">Job Details</h2>
+            @if ($job->requirements || $job->benefits)
             <div class="rounded-lg shadow-md bg-white p-4">
                <h3 class="text-lg font-semibold mb-2 text-blue-500">Job Requirements</h3>
                <p>{{ $job->requirements }}</p>
                <h3 class="text-lg font-semibold mt-4 mb-2 text-blue-500">Benefits</h3>
                <p>{{ $job->benefits }}</p>
             </div>
-            <p class="my-5">
-               Put "Job Application" as the subject of your email
-               and attach your resume.
-            </p>
+            @endif
+            <p class="my-5">Put "Job Application" as the subject of your email and attach your resume.</p>
             <a href="mailto:{{ $job->contact_email }}"
                class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-100 hover:bg-indigo-200">
                Apply Now
@@ -69,7 +70,9 @@
       <!-- Sidebar -->
       <aside class="bg-white rounded-lg shadow-md p-3">
          <h3 class="text-xl text-center mb-4 font-bold">Company Info</h3>
+         @if ($job->company_logo)
          <img src="/images/{{ $job->company_logo }}" alt="{{ $job->company_name }}" class="w-full rounded-lg mb-4 m-auto" />
+         @endif
          <h4 class="text-lg font-bold">{{ $job->company_name }}</h4>
          <p class="text-gray-700 text-lg my-3">{{ $job->company_description }}</p>
          <a href="{{ $job->company_website }}" target="_blank" class="text-blue-500">Visit Website</a>
