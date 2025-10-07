@@ -12,13 +12,15 @@ class RegisterController extends Controller
 {
     // @desc Show register form
     // @route GET /register
-    public function register(): View {
+    public function register(): View
+    {
         return View('auth.register');
     }
 
     // @desc Store user in database
     // @route POST /register
-    public function store(Request $request): RedirectResponse {
+    public function store(Request $request): RedirectResponse
+    {
         $validatedData = $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'required|string|email|max:100|unique:users',

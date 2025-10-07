@@ -11,13 +11,15 @@ class LoginController extends Controller
 {
     // @desc Show login form
     // @route GET /login
-    public function login(): View {
+    public function login(): View
+    {
         return View('auth.login');
     }
 
     // @desc Authenticate user
     // @route POST /login
-    public function authenticate(Request $request): RedirectResponse {
+    public function authenticate(Request $request): RedirectResponse
+    {
         $credentials = $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
@@ -33,5 +35,17 @@ class LoginController extends Controller
 
         // If auth fails, redirect back with error
         return back()->withErrors(['email'=>'The entered credentials are not matching!'])->onlyInput('email');
+    }
+
+    // @desc Logout user
+    // @route POST /logout
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
