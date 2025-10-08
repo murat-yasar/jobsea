@@ -6,7 +6,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Job;
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
 
 class JobController extends Controller
