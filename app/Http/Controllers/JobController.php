@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class JobController extends Controller
 {
@@ -147,6 +148,11 @@ class JobController extends Controller
         }
 
         $job->delete();
+
+        // Check if the request comes from the dashboard
+        if (request()->query('from') === 'dashboard') {
+            return redirect()->route('dashboard')->with('success', 'Job listing deleted successfully!');
+        }
 
         return redirect()->route('jobs.index')->with('success', 'Job listing has been deleted successfully!');
     }
