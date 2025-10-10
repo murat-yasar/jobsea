@@ -70,6 +70,11 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 php artisan serve
 ```
 
+# Reset Database
+```sh
+php artisan db:seed
+```
+
 # Start Dev Server
 ```sh
 npm run dev
