@@ -16,10 +16,10 @@ class ApplicantController extends Controller
         // Validate the incoming request data
         $validatedData = $request->validate([
             'full_name' => 'required|string|max:255',
-            'contact_number' => 'string|max:20',
+            'contact_number' => 'nullable|string|max:20',
             'contact_email' => 'required|string|email',
-            'message' => 'string',
-            'location' => 'string|max:255',
+            'message' => 'nullable|string',
+            'location' => 'nullable|string|max:255',
             'resume' => 'required|file|mimes:pdf|max:2048',
         ]);
 
