@@ -58,7 +58,7 @@ class JobController extends Controller
         $validatedData['user_id'] = auth()->user()->id;
 
         // Check for image
-        if($request->hasFile('company_logo')){
+        if ($request->hasFile('company_logo')) {
             // Store the file and get the path
             $path = $request->file('company_logo')->store('logos', 'public');
 
@@ -118,10 +118,10 @@ class JobController extends Controller
         ]);
 
         // Delete the old image
-        Storage::delete('public/storage/logos/'.basename($job->company_logo));
+        Storage::delete('public/storage/logos/' . basename($job->company_logo));
 
         // Check for image
-        if($request->hasFile('company_logo')){
+        if ($request->hasFile('company_logo')) {
             // Store the file and get the path
             $path = $request->file('company_logo')->store('logos', 'public');
 
@@ -143,7 +143,7 @@ class JobController extends Controller
         $this->authorize('delete', $job);
 
         // If there is a logo, then destroy it
-        if($job->company_logo){
+        if ($job->company_logo) {
             Storage::delete('public/logos/' . $job->company_logo);
         }
 
@@ -155,5 +155,35 @@ class JobController extends Controller
         }
 
         return redirect()->route('jobs.index')->with('success', 'Job listing has been deleted successfully!');
+    }
+
+    // @desc   Search for jobs
+    // @route  GET /jobs/search
+    public function search(Request $request): View
+    {
+        $keywords = strtolower($request->input('keywords'));
+        $location = strtolower($request->input('location'));
+
+        $query = Job::query();
+
+        if ($keywords) {
+            $query->where(function ($q) use ($keywords) {
+                $q->whereRaw('LOWER(title) like ?', ['%' . $keywords . '%'])
+                  ->orWhereRaw('LOWER(description) like ?', ['%' . $keywords . '%']);
+            });
+        }
+
+        if ($location) {
+            $query->where(function ($q) use ($location) {
+                $q->whereRaw('LOWER(address) like ?', ['%' . $location . '%'])
+                  ->orWhereRaw('LOWER(city) like ?', ['%' . $location . '%'])
+                  ->orWhereRaw('LOWER(state) like ?', ['%' . $location . '%'])
+                  ->orWhereRaw('LOWER(zipcode) like ?', ['%' . $location . '%']);
+            });
+        }
+
+        $jobs = $query->paginate(12);
+
+        return view('jobs.index')->with('jobs', $jobs);
     }
 }
