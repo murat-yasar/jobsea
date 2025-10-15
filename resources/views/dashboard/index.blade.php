@@ -16,6 +16,9 @@
 
             <x-inputs.text id="name" name="name" label="Name" value="{{ $user->name }}" />
             <x-inputs.text id="email" name="email" label="E-mail Address" type="email" value="{{ $user->email }}" />
+            <x-inputs.text id="password" name="password" label="password" type="Password" value="{{ $user->password }}" />
+            <x-inputs.text id="password_confirmation" name="password_confirmation" label="Confirm Password" type="password" value="{{ $user->password }}" />
+
             <x-inputs.file id="avatar" name="avatar" label="Upload Avatar" />
 
             <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 border rounded focus:outline-none">Save</button>

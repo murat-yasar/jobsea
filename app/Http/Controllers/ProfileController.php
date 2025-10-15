@@ -21,12 +21,14 @@ class ProfileController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|email',
+            'password' => 'required|string|min:8|confirmed',
             'avatar' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
         ]);
 
         // Get user name and email
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->password = $request->input('password');
 
         // Handle avatar upload
         if($request->hasFile('avatar')){
